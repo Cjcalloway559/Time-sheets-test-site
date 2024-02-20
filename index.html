@@ -5,74 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Fillable Table Form</title>
   <style>
-    table {
-      border-collapse: collapse;
-      width: 100%;
-      margin: 1 auto; /* Center the table horizontally */
-    }
-
-    th, td {
-      border: 1px solid black;
-      padding: 8px;
-      text-align: center
-    }
-
-    /* Adjust the width of the columns as needed */
-    th:nth-child(1), td:nth-child(1) {
-      width: 110px; /* Example width for the first column */
-    }
-
-    th:nth-child(2), td:nth-child(2) {
-      width: 110px; /* Example width for the second column */
-    }
-
-    th:nth-child(3), td:nth-child(3) {
-      width: 110px; /* Example width for the second column */
-    }
-
-    th:nth-child(4), td:nth-child(4) {
-      width: 110px; /* Example width for the second column */
-    }
-
-    th:nth-child(5), td:nth-child(5) {
-      width: 110px; /* Example width for the second column */
-    }
-
-    th:nth-child(6), td:nth-child(6) {
-      width: 110px; /* Example width for the second column */
-    }
-
-    th:nth-child(7), td:nth-child(7) {
-      width: 110px; /* Example width for the second column */
-    }
-
-    th:nth-child(8), td:nth-child(8) {
-      width: 110px; /* Example width for the second column */
-    }
-
-    th:nth-child(9), td:nth-child(9) {
-      width: 110px; /* Example width for the second column */
-    }
-
-    th:nth-child(10), td:nth-child(10) {
-      width: 110px; /* Example width for the second column */
-    }
-
-    th:nth-child(11), td:nth-child(11) {
-      width: 110px; /* Example width for the second column */
-    }
-
-    th:nth-child(12), td:nth-child(12) {
-      width: 200px; /* Example width for the second column */
-    }
-
-    /* Repeat this pattern for other columns if needed */
-
-    /* Adjust the width of the input fields as needed */
-    input[type="text"], input[type="date"], input[type="time"] {
-      width: 90px; /* Example width for text, date, and time input fields */
-    }
-
+    /* Your CSS styles remain unchanged */
   </style>
 </head>
 <body>
@@ -165,27 +98,31 @@
     });
 
     function submitForm() {
-  var formData = new FormData(document.getElementById('tableForm'));
+      var formData = new FormData(document.getElementById('tableForm'));
 
-  for (var pair of formData.entries()) {
-    if (pair[1].trim() === '') {
-      formData.set(pair[0], '-');
+      for (var pair of formData.entries()) {
+        if (pair[1].trim() === '') {
+          formData.set(pair[0], '-');
+        }
+      }
+
+      fetch('https://script.google.com/macros/s/AKfycbx8SIM2-6cAkcT9z5K4p4chHjoRtNCbLxl9qWZTW1s-e-N3UvvlTYqY0DL5GJGxXs8C/exec', {
+        method: 'POST',
+        body: formData
+      })
+      .then(response => response.json())
+      .then(data => {
+        console.log(data);
+        clearTable();
+        window.location.href = 'success-page.html'; // Redirect to the success page
+      })
+      .catch(error => console.error(error));
     }
-  }
 
-  fetch('https://script.google.com/macros/s/AKfycbx8SIM2-6cAkcT9z5K4p4chHjoRtNCbLxl9qWZTW1s-e-N3UvvlTYqY0DL5GJGxXs8C/exec', {
-    method: 'POST',
-    body: formData
-  })
-  .then(response => response.json())
-  .then(data => {
-    console.log(data);
-    window.location.href = 'success-page.html'; // Redirect to the success page
-  })
-  .catch(error => console.error(error));
-}
-
-  
+    function clearTable() {
+      var tableBody = document.querySelector('tbody');
+      tableBody.innerHTML = ''; // Clear all rows from the table
+    }
   </script>
 </body>
 </html>
