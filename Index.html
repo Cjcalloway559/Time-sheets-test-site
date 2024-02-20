@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fillable Table Form</title>
+  <style>
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      margin: 1 auto; /* Center the table horizontally */
+    }
+
+    th, td {
+      border: 1px solid black;
+      padding: 8px;
+      text-align: center
+    }
+
+    /* Adjust the width of the columns as needed */
+    th:nth-child(1), td:nth-child(1) {
+      width: 110px; /* Example width for the first column */
+    }
+
+    th:nth-child(2), td:nth-child(2) {
+      width: 110px; /* Example width for the second column */
+    }
+
+    th:nth-child(3), td:nth-child(3) {
+      width: 110px; /* Example width for the second column */
+    }
+
+    th:nth-child(4), td:nth-child(4) {
+      width: 110px; /* Example width for the second column */
+    }
+
+    th:nth-child(5), td:nth-child(5) {
+      width: 110px; /* Example width for the second column */
+    }
+
+    th:nth-child(6), td:nth-child(6) {
+      width: 110px; /* Example width for the second column */
+    }
+
+    th:nth-child(7), td:nth-child(7) {
+      width: 110px; /* Example width for the second column */
+    }
+
+    th:nth-child(8), td:nth-child(8) {
+      width: 110px; /* Example width for the second column */
+    }
+
+    th:nth-child(9), td:nth-child(9) {
+      width: 110px; /* Example width for the second column */
+    }
+
+    th:nth-child(10), td:nth-child(10) {
+      width: 110px; /* Example width for the second column */
+    }
+
+    th:nth-child(11), td:nth-child(11) {
+      width: 110px; /* Example width for the second column */
+    }
+
+    th:nth-child(12), td:nth-child(12) {
+      width: 200px; /* Example width for the second column */
+    }
+
+    /* Repeat this pattern for other columns if needed */
+
+    /* Adjust the width of the input fields as needed */
+    input[type="text"], input[type="date"], input[type="time"] {
+      width: 90px; /* Example width for text, date, and time input fields */
+    }
+
+  </style>
+</head>
+<body>
+  <form id="tableForm">
+    <table>
+      <thead>
+        <tr>
+          <th>Employee Name</th>
+          <th>Date</th>
+          <th>Plant Name</th>
+          <th>Cost Center</th>
+          <th>Work Order</th>
+          <th>Project</th>
+          <th>Task</th>
+          <th>Travel</th>
+          <th>Time In</th>
+          <th>Time Out</th>
+          <th>Hours</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Add 15 rows dynamically using JavaScript -->
+      </tbody>
+    </table>
+    <br>
+    <input type="submit" value="Submit">
+  </form>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var form = document.getElementById('tableForm');
+      form.addEventListener('submit', function(event) {
+        event.preventDefault();
+        submitForm();
+      });
+
+      // Add 15 rows to the table
+      var tableBody = document.querySelector('tbody');
+      for (var i = 0; i < 15; i++) {
+        var row = document.createElement('tr');
+        for (var j = 0; j < 12; j++) {
+          var cell = document.createElement('td');
+          var input;
+
+          if (j === 0) {
+            if (i === 0) {
+              input = document.createElement('input');
+              input.type = 'text';
+              input.name = 'row' + i + 'col' + j;
+            } else {
+              input = document.createElement('span');
+              input.innerText = '';
+            }
+          } else if (j === 1) {
+            if (i === 0) {
+              input = document.createElement('input');
+              input.type = 'date';
+              input.name = 'row' + i + 'col' + j;
+            } else {
+              input = document.createElement('span');
+              input.innerText = '';
+            }
+          } else if (j === 7) {
+            input = document.createElement('input');
+            input.type = 'text';
+            input.name = 'row' + i + 'col' + j;
+          } else if (j === 8 || j === 9) {
+            input = document.createElement('input');
+            input.type = 'time';
+            input.name = 'row' + i + 'col' + j;
+          } else if (j === 10) {
+            input = document.createElement('input');
+            input.type = 'text';
+            input.name = 'row' + i + 'col' + j;
+          } else if (j === 11) {
+            input = document.createElement('textarea');
+            input.name = 'row' + i + 'col' + j;
+          } else {
+            input = document.createElement('input');
+            input.type = 'text';
+            input.name = 'row' + i + 'col' + j;
+          }
+
+          cell.appendChild(input);
+          row.appendChild(cell);
+        }
+        tableBody.appendChild(row);
+      }
+    });
+
+    function submitForm() {
+      var formData = new FormData(document.getElementById('tableForm'));
+
+      for (var pair of formData.entries()) {
+        if (pair[1].trim() === '') {
+          formData.set(pair[0], '-');
+        }
+      }
+
+      fetch('https://script.google.com/macros/s/AKfycbx8SIM2-6cAkcT9z5K4p4chHjoRtNCbLxl9qWZTW1s-e-N3UvvlTYqY0DL5GJGxXs8C/exec', {
+        method: 'POST',
+        body: formData
+      })
+      .then(response => response.json())
+      .then(data => {
+        console.log(data);
+        clearFormFields();
+      })
+      .catch(error => console.error(error));
+    }
+
+    function clearFormFields() {
+      var form = document.getElementById('tableForm');
+      var inputs = form.querySelectorAll('input, textarea');
+      
+      inputs.forEach(function(input) {
+        input.value = '';
+      });
+    }
+  </script>
+</body>
+</html>
