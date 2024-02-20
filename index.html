@@ -185,9 +185,9 @@
       .catch(error => console.error(error));
     }
 
-    function clearFormFields() {
-      var form = document.getElementById('tableForm');
-      var inputs = form.querySelectorAll('input, textarea');
+    function clearTable() {
+      var tableBody = document.querySelector('tbody');
+      tableBody.innerHTML = ''; // Clear all rows from the table
       
       inputs.forEach(function(input) {
         input.value = '';
