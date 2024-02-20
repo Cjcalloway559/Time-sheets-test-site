@@ -112,9 +112,9 @@
       })
       .then(response => response.json())
       .then(data => {
-        console.log(data);
-        window.location.href = 'success.html'; // Redirect to the success page
-      })
+   console.log('Fetch successful:', data);
+   window.location.href = 'success-page.html'; // Redirect to the success page
+})
       .catch(error => console.error(error));
     }
   </script>
