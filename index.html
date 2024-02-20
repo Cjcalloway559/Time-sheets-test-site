@@ -165,24 +165,24 @@
     });
 
     function submitForm() {
-      var formData = new FormData(document.getElementById('tableForm'));
+  var formData = new FormData(document.getElementById('tableForm'));
 
-      for (var pair of formData.entries()) {
-        if (pair[1].trim() === '') {
-          formData.set(pair[0], '-');
-        }
-      }
+  for (var pair of formData.entries()) {
+    if (pair[1].trim() === '') {
+      formData.set(pair[0], 'XXX');
+    }
+  }
 
-      fetch('https://script.google.com/macros/s/AKfycbx8SIM2-6cAkcT9z5K4p4chHjoRtNCbLxl9qWZTW1s-e-N3UvvlTYqY0DL5GJGxXs8C/exec', {
-        method: 'POST',
-        body: formData
-      })
-      .then(response => response.json())
-      .then(data => {
-        console.log(data);
-        window.location.href = 'success.html'; // Redirect to the success page
-      })
-      .catch(error => console.error(error));
+  fetch('https://script.google.com/macros/s/AKfycbx8SIM2-6cAkcT9z5K4p4chHjoRtNCbLxl9qWZTW1s-e-N3UvvlTYqY0DL5GJGxXs8C/exec', {
+    method: 'POST',
+    body: formData
+  })
+  .then(response => response.json())
+  .then(data => {
+    console.log(data);
+    window.location.href = 'success-page.html'; // Redirect to the success page
+  })
+  .catch(error => console.error(error));
 }
 
     function clearTable() {
