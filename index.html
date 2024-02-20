@@ -180,10 +180,10 @@
       .then(response => response.json())
       .then(data => {
         console.log(data);
-        clearFormFields();
+        window.location.href = 'success.html'; // Redirect to the success page
       })
       .catch(error => console.error(error));
-    }
+}
 
     function clearTable() {
       var tableBody = document.querySelector('tbody');
