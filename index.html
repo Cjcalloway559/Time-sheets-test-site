@@ -113,15 +113,9 @@
       .then(response => response.json())
       .then(data => {
         console.log(data);
-        clearTable();
         window.location.href = 'success-page.html'; // Redirect to the success page
       })
       .catch(error => console.error(error));
-    }
-
-    function clearTable() {
-      var tableBody = document.querySelector('tbody');
-      tableBody.innerHTML = ''; // Clear all rows from the table
     }
   </script>
 </body>
